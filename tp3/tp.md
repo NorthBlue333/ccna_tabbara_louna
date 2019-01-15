@@ -32,14 +32,14 @@ Saving to: ‘index.html’
 2019-01-15 15:47:30 (1.91 MB/s) - ‘index.html’ saved [11313]
 ```
 * **Connexion VM et PC :**
- * Depuis la VM :
+    * Depuis la VM :
 ```
 ping 192.168.102.1
 PING 192.168.102.1 (192.168.102.1) 56(84) bytes of data.
 64 bytes from 192.168.102.1: icmp_seq=1 ttl=128 time=0.243 ms
 64 bytes from 192.168.102.1: icmp_seq=2 ttl=128 time=0.327 ms
 ```
- * Depuis le PC :
+     * Depuis le PC :
 ```
 ping 192.168.102.10
 
@@ -57,7 +57,7 @@ La première ligne indique l'adresse IP utilisée par la VM pour communiquer sur
 
 # III. Routage statique
 * **PC1 à PC2 :**
-  * ```ping 192.168.112.1
+      * ```ping 192.168.112.1
        Envoi d’une requête 'Ping'  192.168.112.1 avec 32 octets de données :
        Réponse de 192.168.112.1 : octets=32 temps=4 ms TTL=128
        Réponse de 192.168.112.1 : octets=32 temps=4 ms TTL=128
@@ -65,7 +65,7 @@ La première ligne indique l'adresse IP utilisée par la VM pour communiquer sur
        Réponse de 192.168.112.1 : octets=32 temps=4 ms TTL=128
     ```
 * **PC à VM**
-  * ```ping 192.168.102.10
+      * ```ping 192.168.102.10
        Envoi d’une requête 'Ping'  192.168.102.10 avec 32 octets de données :
        Réponse de 192.168.102.10 : octets=32 temps<1ms TTL=64
        Réponse de 192.168.102.10 : octets=32 temps<1ms TTL=64
