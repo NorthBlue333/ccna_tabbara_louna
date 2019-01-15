@@ -39,7 +39,9 @@ PING 192.168.102.1 (192.168.102.1) 56(84) bytes of data.
 64 bytes from 192.168.102.1: icmp_seq=1 ttl=128 time=0.243 ms
 64 bytes from 192.168.102.1: icmp_seq=2 ttl=128 time=0.327 ms
 ```
+
      * Depuis le PC :
+     
 ```
 ping 192.168.102.10
 
