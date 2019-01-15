@@ -102,6 +102,33 @@ Destination réseau    Masque réseau  Adr. passerelle   Adr. interface Métriqu
     ;; ANSWER SECTION:
     ynov.com.               10799   IN      A       217.70.184.38
     ```
+# II. Notion de ports SSH
+`ss -n -p -l`
+```
+tcp    LISTEN     0      128                          :::22                                     :::*                   users:(("sshd",pid=3154,fd=4))
+```
+*SSh écoute sur le port 22 du PC*
+```
+C:\Users\Louna>ssh toor@192.168.102.10 -p 2222
+toor@192.168.102.10's password:
+Last login: Tue Jan 15 16:43:25 2019 from pc2
+[toor@localhost ~]$
+```
+*SSH depuis la console Windaube !*
+
+**Firewall :**
+La connexion de fonctionne pas car le pare-feu bloque la connexion. Il suffit d'ouvrir le port du pare-feu (magie, avec le port 2222 ouvert, ça marche !)
+
+**Netcat :**
+```
+[toor@localhost ~]$ nc -l 5454
+Netcat
+```
+```
+nc 192.168.102.10 5454
+Netcat
+```
+*On peut voir que netcat écoute sur le port 5454 avec la commande `ss -n -l -p`*
 
 # III. Routage statique
 * PC1 : `192.168.112.1`
@@ -182,4 +209,13 @@ ping vm1.tp3.b1
 
 Envoi d’une requête 'ping' sur vm1.tp3.b1 [192.168.101.10] avec 32 octets de données :
 Réponse de 192.168.101.10 : octets=32 temps=4 ms TTL=63
+```
+**Netcat :**
+```
+nc vm1.tp3.b1 5454
+Voici un joli netcat
+miaou
+nc -l 5454
+miaou
+netcat
 ```
