@@ -125,10 +125,13 @@ Réponse de 192.168.102.10 : octets=32 temps<1ms TTL=64
 Réponse de 192.168.102.10 : octets=32 temps<1ms TTL=64
 Réponse de 192.168.102.10 : octets=32 temps<1ms TTL=64
 ```
+
 *Ajout de la route sur PC2*
 `ip route add 192.168.101.0/24 mask 255.255.255.0 192.168.112.1`
+
 *Ajout de la route sur VM2*
 `ip route add 192.168.101.0/24 via 192.168.102.1 dev enp0s8`
+
 *Hosts sur PC2*
 ```
 127.0.0.1 pc2.tp3.b1
@@ -136,6 +139,7 @@ Réponse de 192.168.102.10 : octets=32 temps<1ms TTL=64
 192.168.102.10 vm2.tp3.b1
 192.168.101.10 vm1.tp3.b1
 ```
+
 *Hosts sur VM2*
 ```
 127.0.0.1 vm2.tp3.b1
