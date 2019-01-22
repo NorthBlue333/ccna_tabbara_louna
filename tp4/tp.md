@@ -78,3 +78,89 @@ De même, c'est la connexion Virtual Host
 10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b DELAY
 ```
 Ce sont les deux route pour client1 et server1
+ ## Manip 3
+ ```
+ arp -a
+ Interface : 10.33.2.16 --- 0x5
+  Adresse Internet      Adresse physique      Type
+  10.33.0.54            bc-a8-a6-fd-da-7c     dynamique
+  10.33.0.139           5c-c5-d4-8c-83-c7     dynamique
+  10.33.1.198           68-07-15-41-b8-fb     dynamique
+  10.33.2.17            70-c9-4e-75-e3-77     dynamique
+  10.33.2.78            10-4a-7d-44-f3-a4     dynamique
+  10.33.2.145           04-d3-b0-0e-73-a1     dynamique
+  10.33.2.179           b4-d5-bd-ac-ca-ec     dynamique
+  10.33.2.191           c0-b6-f9-77-77-a2     dynamique
+  10.33.3.109           34-41-5d-ac-f4-9a     dynamique
+  10.33.3.198           08-d4-0c-c7-20-04     dynamique
+  10.33.3.253           00-12-00-40-4c-bf     dynamique
+  10.33.3.254           94-0c-6d-84-50-c8     dynamique
+  10.33.3.255           ff-ff-ff-ff-ff-ff     statique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  224.0.0.251           01-00-5e-00-00-fb     statique
+  224.0.0.252           01-00-5e-00-00-fc     statique
+  230.0.0.1             01-00-5e-00-00-01     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+Interface : 10.1.0.1 --- 0xb
+  Adresse Internet      Adresse physique      Type
+  10.1.0.10             08-00-27-d3-57-10     dynamique
+  10.1.0.254            08-00-27-bb-9a-30     dynamique
+  10.1.0.255            ff-ff-ff-ff-ff-ff     statique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  224.0.0.251           01-00-5e-00-00-fb     statique
+  224.0.0.252           01-00-5e-00-00-fc     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+Interface : 10.2.0.1 --- 0xe
+  Adresse Internet      Adresse physique      Type
+  10.2.0.10             08-00-27-8c-a8-a9     dynamique
+  10.2.0.255            ff-ff-ff-ff-ff-ff     statique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  224.0.0.251           01-00-5e-00-00-fb     statique
+  224.0.0.252           01-00-5e-00-00-fc     statique
+  230.0.0.1             01-00-5e-00-00-01     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+  ```
+  ```
+  arp -d *
+  arp -a
+Interface : 10.33.2.16 --- 0x5
+  Adresse Internet      Adresse physique      Type
+  10.33.3.253           00-12-00-40-4c-bf     dynamique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+Interface : 10.1.0.1 --- 0xb
+  Adresse Internet      Adresse physique      Type
+  224.0.0.22            01-00-5e-00-00-16     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+Interface : 10.2.0.1 --- 0xe
+  Adresse Internet      Adresse physique      Type
+  224.0.0.22            01-00-5e-00-00-16     statique
+  230.0.0.1             01-00-5e-00-00-01     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+  ```
+  puis
+  ```
+  arp -a
+Interface : 10.33.2.16 --- 0x5
+  Adresse Internet      Adresse physique      Type
+  10.33.2.17            70-c9-4e-75-e3-77     dynamique
+  10.33.3.253           00-12-00-40-4c-bf     dynamique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+Interface : 10.1.0.1 --- 0xb
+  Adresse Internet      Adresse physique      Type
+  224.0.0.22            01-00-5e-00-00-16     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+Interface : 10.2.0.1 --- 0xe
+  Adresse Internet      Adresse physique      Type
+  224.0.0.22            01-00-5e-00-00-16     statique
+  230.0.0.1             01-00-5e-00-00-01     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+  ```
+  La ligne 10.33.2.17 a été ajoutée
