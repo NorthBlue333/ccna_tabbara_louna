@@ -47,3 +47,34 @@ traceroute to server1 (10.2.0.10), 30 hops max, 60 byte packets
  1  router1 (10.1.0.254)  0.455 ms  0.324 ms  0.184 ms
  2  router1 (10.1.0.254)  0.095 ms !X  0.229 ms !X  0.278 ms !X
 ```
+
+# ARP
+## Manip 1
+*Après un sudo ip neigh flush all*
+client1
+`10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE`
+server1
+`10.2.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0e REACHABLE`
+Ce sont les connexions Virtual Host de VirtualBox
+*Après un ping*
+client1
+```
+10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE
+10.1.0.254 dev enp0s3 lladdr 08:00:27:bb:9a:30 REACHABLE
+```
+server1
+```
+10.2.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0e DELAY
+10.2.0.254 dev enp0s3 lladdr 08:00:27:c7:a9:68 DELAY
+```
+La ligne ajoutée est celle du routeur qui permet l'accès à l'autre réseau
+
+## Manip 2
+`10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE`
+De même, c'est la connexion Virtual Host
+```
+10.1.0.10 dev enp0s3 lladdr 08:00:27:d3:57:10 REACHABLE
+10.2.0.10 dev enp0s8 lladdr 08:00:27:8c:a8:a9 REACHABLE
+10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b DELAY
+```
+Ce sont les deux route pour client1 et server1
