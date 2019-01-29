@@ -203,4 +203,13 @@ L'adresse `10.0.3.2` est celle du PC qui est connecté en NAT à la VM et permet
 ## A. Interception d'ARP et ping
 **Sur router1** `sudo tcpdump -i enp0s9 -w ping.pcap` *ping depuis client1 vers server1*
 
-Ouverture d'un accès navigateur internet pour récupérer le fichier [ping.pcap](ping.pcap)
+Ouverture d'un accès navigateur internet pour récupérer le fichier [Wireshark ping.pcap](ping.pcap)
+
+## B. netcat
+**Sur server1** `firewall-cmd --add-port=5454/tcp --permanent`, `nc -l 5454`
+
+**Sur client1** `nc server1 5454`
+
+**Sur router1** `sudo tcpdump -i enp0s9 -w nc.pcap`
+
+[Wireshark nc.pcap](nc.pcap)
