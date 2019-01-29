@@ -191,6 +191,8 @@ ip neigh show
 L'adresse `10.0.3.2` est celle du PC qui est connecté en NAT à la VM et permet l'accès à internet.
 
 **Récapitulatif**
+
+
 | Machine | net1         | net2         | MACnet1             | MACnet2             |
 |---------|--------------|--------------|---------------------|---------------------|
 | client1 |  `10.0.1.10` |       X      | `08:00:27:d3:57:10` |          X          |
