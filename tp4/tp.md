@@ -163,4 +163,38 @@ Interface : 10.2.0.1 --- 0xe
   230.0.0.1             01-00-5e-00-00-01     statique
   239.255.255.250       01-00-5e-7f-ff-fa     statique
   ```
-  La ligne 10.33.2.17 a été ajoutée
+  La ligne 10.33.2.17 a été ajoutée. Le PC se connecte à internet, il a donc besoin d'une passerelle.
+  
+  ## Manip 4
+  `sudo ip neigh flush all` sur toutes les machines.
+ Sur **client1** :
+```
+ip neigh show
+10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE
+```
+  Activation de la carte NAT sur Virtual Box et redémarrage de la VM.
+ ```
+ curl google.com
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+ ```
+*On a bien un accès internet sur la VM*
+```
+ip neigh show
+10.0.3.2 dev enp0s8 lladdr 52:54:00:12:35:02 DELAY
+10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE
+```
+L'adresse `10.0.3.2` est celle du PC qui est connecté en NAT à la VM et permet l'accès à internet.
+
+**Récapitulatif**
+| Machine  |      net1     |     net2     |       MACnet1     |       MACnet2     |
+|----------|:-------------:|-------------:|------------------:|------------------:|
+| client1  |  `10.0.1.10`  |       X      |`08:00:27:d3:57:10`|         X         |
+| router1  |  `10.1.0.254` | `10.2.0.254` |`08:00:27:bb:9a:30`|`08:00:27:c7:a9:68`|
+| server1  |       X       |  `10.2.0.10` |         X         |`08:00:27:8c:a8:a9`|
+
+# Wireshark
