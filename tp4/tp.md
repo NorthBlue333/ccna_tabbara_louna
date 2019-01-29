@@ -350,4 +350,9 @@ curl server1
 ```
 
 [Wireshark http.pcap](http.pcap)
-
+On voit :
+* La requête ARP (Who has `10.2.0.10? Tell 10.0.2.254` et `10.2.0.10 is at 08:00:27:8c:a8:a9`)
+* Le trafic HTTP qui passe par des trames TCP, depuis `10.1.0.10` (client1) vers `10.2.0.10` (server1) : c'est la demande de la page HTML (demande la synchronisation)
+* De même, mais de server1 vers client1, où il répond en acceptant la synchronisation
+* Le fichier HTTP et demandé par client1 (trame HTTP) et renvoyé par server1 (trame HTTP `text/html`)
+* Les deux VM échangent pour terminer la synchronisation
