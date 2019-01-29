@@ -213,3 +213,9 @@ Ouverture d'un accès navigateur internet pour récupérer le fichier [Wireshark
 **Sur router1** `sudo tcpdump -i enp0s9 -w nc.pcap`
 
 [Wireshark nc.pcap](nc.pcap)
+
+*fermeture du port firewall*
+
+[Wireshark ncfirewall.pcap](ncfirewall.pcap)
+
+On peut voir `Destination unreachable (host adminisrtatively prohibited)` sur Wireshark.
