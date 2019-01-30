@@ -51,12 +51,17 @@ traceroute to server1 (10.2.0.10), 30 hops max, 60 byte packets
 # ARP
 ## Manip 1
 *Après un sudo ip neigh flush all*
-client1
-`10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE`
-server1
-`10.2.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0e REACHABLE`
+
+client1 `10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE`
+
+server1 `10.2.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0e REACHABLE`
+
 Ce sont les connexions Virtual Host de VirtualBox
+
+
 *Après un ping*
+
+
 client1
 ```
 10.1.0.1 dev enp0s3 lladdr 0a:00:27:00:00:0b REACHABLE
