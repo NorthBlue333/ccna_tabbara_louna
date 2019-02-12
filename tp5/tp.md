@@ -4,7 +4,7 @@
 Mise en place du réseau avec le drag&drop.
 
 ## Checklist IP VMs
-- [] Définition des IPs statiques
-- [] La connexion SSH doit être fonctionnelle
+- [X] Définition des IPs statiques
+- [ ] La connexion SSH doit être fonctionnelle
   - une fois fait, vous avez vos trois fenêtres SSH ouvertes, une dans chaque machine
-- [] Définition du nom de domaine
+- [ ] Définition du nom de domaine
