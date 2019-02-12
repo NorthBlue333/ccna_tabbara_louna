@@ -104,7 +104,36 @@ ip route 10.5.2.0 255.255.255.0 10.5.3.2
 conf t
 ip route 10.5.1.0 255.255.255.0 10.5.3.2
 ```
-- [ ] server1.tp5.b1
-- [ ] client1.tp5.b1
-- [ ] client2.tp5.b1
-- [ ] router1.tp5.b1
+- [X] server1.tp5.b1
+```
+sudo nano /etc/sysconfig/network-script/route-enp0s3
+(dans le fichier) 10.5.2.0/24 via 10.5.1.254 dev enp0s3
+sudo systemctl restart network
+```
+- [X] client1.tp5.b1
+```
+sudo nano /etc/sysconfig/network-script/route-enp0s3
+(dans le fichier) 10.5.1.0/24 via 10.5.2.254 dev enp0s3
+sudo systemctl restart network
+```
+- [X] client2.tp5.b1
+```
+sudo nano /etc/sysconfig/network-script/route-enp0s3
+(dans le fichier) 10.5.1.0/24 via 10.5.2.254 dev enp0s3
+sudo systemctl restart network
+```
+
+**Depuis client1**
+```
+ping server1
+PING server1 (10.5.1.10) 56(84) bytes of data.
+64 bytes from server1 (10.5.1.10): icmp_seq=2 ttl=62 time=29.5 ms
+64 bytes from server1 (10.5.1.10): icmp_seq=3 ttl=62 time=26.6 ms
+```
+**Depuis client2**
+```
+ping server1
+PING server1 (10.5.1.10) 56(84) bytes of data.
+64 bytes from server1 (10.5.1.10): icmp_seq=1 ttl=62 time=35.2 ms
+64 bytes from server1 (10.5.1.10): icmp_seq=2 ttl=62 time=28.6 ms
+```
