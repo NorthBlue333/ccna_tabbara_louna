@@ -37,3 +37,46 @@ sudo ifup enp0s3
 10.5.2.11 client2 client2.tp5.b1
 10.5.1.10 server1 server1.tp5.b1
 ```
+## Checklist IP Routeurs
+- [X] Définition des IPs statiques
+router1 :
+```
+show ip int br
+conf t
+interface ethernet 0/0
+ip address 10.5.1.254 255.255.255.0
+no shut
+exit
+interface ethernet 0/3
+ip address 10.5.3.1 255.255.255.252
+no shut
+exit
+exit
+```
+router2 :
+```
+show ip int br
+conf t
+interface ethernet 0/0
+ip address 10.5.2.254 255.255.255.0
+no shut
+exit
+interface ethernet 0/3
+ip address 10.5.3.2 255.255.255.252
+no shut
+exit
+exit
+```
+- [X] Définition du nom de domaine
+router1 :
+```
+conf t
+hostname router1.tp5.b1
+exit
+```
+router2 :
+```
+conf t
+hostname router2.tp5.b1
+exit
+```
