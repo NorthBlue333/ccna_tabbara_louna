@@ -38,6 +38,7 @@ sudo ifup enp0s3
 10.5.1.10 server1 server1.tp5.b1
 ```
 ## Checklist IP Routeurs
+Le réseau sur lequel les router sont est en /30 car on n'a pas besoin de plus de 2 machines sur le réseau.
 - [X] Définition des IPs statiques
 router1 :
 ```
@@ -80,3 +81,30 @@ conf t
 hostname router2.tp5.b1
 exit
 ```
+
+| Machine |     net1     |     net2     | net12 |       SSH      |
+|:-------:|:------------:|:------------:|:-----:|:--------------:|
+| client1 |       X      |  `10.5.2.10` |   X   | `192.168.98.4` |
+| client2 |       X      |  `10.5.2.11` |   X   | `192.168.98.3` |
+| router1 | `10.5.1.254` |       X      |       |        X       |
+| router2 |       X      | `10.5.2.254` |       |        X       |
+| server1 |  `10.5.1.10` |       X      |   X   | `192.168.98.5` |
+
+
+## Checklist routes
+Fichiers hosts fait en même temps que le hostname
+
+- [X] router1.tp5.b1
+```
+conf t
+ip route 10.5.2.0 255.255.255.0 10.5.3.2
+```
+- [X] router2.tp5.b1
+```
+conf t
+ip route 10.5.1.0 255.255.255.0 10.5.3.2
+```
+- [ ] server1.tp5.b1
+- [ ] client1.tp5.b1
+- [ ] client2.tp5.b1
+- [ ] router1.tp5.b1
