@@ -137,3 +137,50 @@ PING server1 (10.5.1.10) 56(84) bytes of data.
 64 bytes from server1 (10.5.1.10): icmp_seq=1 ttl=62 time=35.2 ms
 64 bytes from server1 (10.5.1.10): icmp_seq=2 ttl=62 time=28.6 ms
 ```
+
+# DHCP
+client2 renommée dhcp-net2
+
+Ajout de la carte NAT via virtual box, démarrage de la machine, `sudo yum install -y dhcp`, shutdown de la VM, rallumage dans GNS3.
+
+Dans le fichier `sudo nano /etc/dhcp/dhcpd.conf` de dhcp-net2 :
+
+```
+# dhcpd.conf
+
+# option definitions common to all supported networks
+option domain-name "tp5.b1";
+
+default-lease-time 600; //durée du bail par défaut
+max-lease-time 7200; //durée maximum du bail
+
+# If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+authoritative;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+log-facility local7;
+
+subnet 10.5.2.0 netmask 255.255.255.0 { //sous réseau et masque
+  range 10.5.2.50 10.5.2.70; //plage d'adressage
+  option domain-name "tp5.b1"; //nom du domain
+  option routers 10.5.2.254; //IP du router
+  option broadcast-address 10.5.2.255; //IP broadcast
+}
+```
+
+Sur client1 :
+
+* IP dynamique
+`sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s3`
+
+```
+NAME=enp0s3
+DEVICE=enp0s3
+
+BOOTPROTO=dhcp
+ONBOOT=yes
+```
+
+* dhclient
