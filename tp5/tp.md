@@ -169,6 +169,7 @@ subnet 10.5.2.0 netmask 255.255.255.0 { //sous réseau et masque
   option broadcast-address 10.5.2.255; //IP broadcast
 }
 ```
+puis `sudo systemctl enable dhcpd`
 
 Sur client1 :
 
@@ -182,5 +183,27 @@ DEVICE=enp0s3
 BOOTPROTO=dhcp
 ONBOOT=yes
 ```
-
+`sudo ifdown enp0s3 `et` sudo ifup enp0s3`
+Résultat : `ip a`
+```
+enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:35:66:94 brd ff:ff:ff:ff:ff:ff
+    inet 10.5.2.50/24 brd 10.5.2.255 scope global noprefixroute dynamic enp0s3
+       valid_lft 598sec preferred_lft 598sec
+    inet6 fe80::a00:27ff:fe35:6694/64 scope link
+       valid_lft forever preferred_lft forever
+```
 * dhclient
+```
+sudo dhclient -v -r //release du bail
+sudo dhclient -v
+
+ip a
+enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:35:66:94 brd ff:ff:ff:ff:ff:ff
+    inet 10.5.2.51/24 brd 10.5.2.255 scope global dynamic enp0s3
+       valid_lft 598sec preferred_lft 598sec
+    inet6 fe80::a00:27ff:fe35:6694/64 scope link
+```
+
+* capture [lease.pcap](lease.pcap)
