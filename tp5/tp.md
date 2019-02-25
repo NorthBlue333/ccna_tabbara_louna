@@ -219,7 +219,7 @@ sudo firewall-cmd --reload
 sudo systemctl start nginx
 ```
 
-sur client1 :
+  sur client1 :
 
 ```
 curl 10.5.1.10
@@ -459,3 +459,70 @@ curl 10.5.1.10
 </html>
 ```
 
+* clés RSA
+A partir de [ce site](https://technique.arscenic.org/connexion-distante-au-serveur-ssh/article/securisation-ssh-poussee-authentification-par-cle-rsa).
+
+sur client2 :
+```
+ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/toor/.ssh/id_rsa):
+Created directory '/home/toor/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/toor/.ssh/id_rsa.
+Your public key has been saved in /home/toor/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:mMacKc0IJQaQPqc4Cr4z/fON7ynpyhic/jwJB3k0G2A toor@client2.tp5.b1
+The key's randomart image is:
++---[RSA 2048]----+
+|+ooEo            |
+|...o +           |
+|. . o +          |
+| o = O =         |
+|. + = @ S        |
+|+....+           |
+|+..+o . .        |
+|.+..=+ oo .      |
+| .+oo**++=       |
++----[SHA256]-----+
+ssh-copy-id -i ~/.ssh/id_rsa.pub toor@10.5.1.10
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/toor/.ssh/id_rsa.pub"
+The authenticity of host '10.5.1.10 (10.5.1.10)' can't be established.
+ECDSA key fingerprint is SHA256:REkWEazPn0G2b7jjN43oZxhLT+CjHIuNfgJTN/yhPTk.
+ECDSA key fingerprint is MD5:04:88:86:00:46:f9:ee:cf:3e:4b:0a:b7:7d:d2:de:8b.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+toor@10.5.1.10's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'toor@192.168.98.5'"
+and check to make sure that only the key(s) you wanted were added.
+```
+
+sur server1 :
+```
+service sshd restart
+Redirecting to /bin/systemctl restart sshd.service
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to manage system services or units.
+Authenticating as: toor
+Password:
+==== AUTHENTICATION COMPLETE ===
+[toor@server1 ~]$ chmod 700 ~/.ssh && chmod 600 ./~ssh/*
+chmod: cannot access ‘./~ssh/*’: No such file or directory
+[toor@server1 ~]$ sudo nano /etc/ssh/sshd_config
+[sudo] password for toor:
+[toor@server1 ~]$
+//ici on met PasswordAuthentication no
+
+[toor@server1 ~]$ service sshd restart
+```
+
+On peut se connecter en ssh depuis client2 sans problème juste en tapant `ssh toor@10.5.1.10`, mais depuis client1 ça donne :
+```
+ssh toor@10.5.1.10
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+```
