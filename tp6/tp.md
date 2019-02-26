@@ -15,4 +15,4 @@ Les cartes Host-Only pour le SSH sont configurées :
 | server1 | `192.168.98.5` |
 
 ## Checklist routers
-[X] dgfsdf
+[X] - dgfsdf
